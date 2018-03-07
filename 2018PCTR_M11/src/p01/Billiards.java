@@ -10,6 +10,11 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * 
+ * @author LuisMiguel.
+ *
+ */
 @SuppressWarnings("serial")
 public class Billiards extends JFrame {
 

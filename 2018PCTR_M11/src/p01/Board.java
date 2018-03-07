@@ -6,6 +6,11 @@ import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author LuisMiguel.
+ *
+ */
 @SuppressWarnings("serial")
 public class Board extends JPanel {
 
