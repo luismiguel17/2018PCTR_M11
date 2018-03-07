@@ -11,24 +11,33 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * 
+ * Billiards. Clase Ventana que contiene el tablero.
  * @author LuisMiguel.
- *
+ * @version 1.0
  */
 @SuppressWarnings("serial")
 public class Billiards extends JFrame {
 
+	// Ancho Tablero
 	public static int Width = 800;
+	// Alto Tablero
 	public static int Height = 600;
 
+	// Boton parar, iniciar
 	private JButton b_start, b_stop;
 
+	// Tablero
 	private Board board;
 
 	// TODO update with number of group label. See practice statement.
+	// Numero de bolas en el tablero.
 	private final int N_BALL = 2;
+	// Array de bolas.
 	private Ball[] balls;
 
+	/**
+	 * Billiards. constructor que inicializa los componentes del tablero.
+	 */
 	public Billiards() {
 
 		board = new Board();
@@ -59,10 +68,18 @@ public class Billiards extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * initBalls. Metodo que inicializa las bolas.
+	 */
 	private void initBalls() {
 		// TODO init balls
 	}
 
+	/**
+	 * StartListener. Clase interna que inicia la ejecucion del tablero.
+	 * @author LuisMiguel
+	 *
+	 */
 	private class StartListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -71,6 +88,11 @@ public class Billiards extends JFrame {
 		}
 	}
 
+	/**
+	 * StopListener. Clase interna que para la ejecucion del tablero.
+	 * @author LuisMiguel
+	 *
+	 */
 	private class StopListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
@@ -78,6 +100,11 @@ public class Billiards extends JFrame {
 
 		}
 	}
+	
+	/**
+	 * main. Metodo inicial.
+	 * @param args argumentos.
+	 */
 
 	public static void main(String[] args) {
 		new Billiards();
