@@ -31,15 +31,20 @@ public class Billiards extends JFrame {
 
 	// TODO update with number of group label. See practice statement.
 	// Numero de bolas en el tablero.
-	private final int N_BALL = 2;
+	private final int N_BALL = 3;
 	// Array de bolas.
-	private Ball[] balls;
+	private Ball[] balls = new Ball[N_BALL];
+	private Thread[] hilos = new Thread[N_BALL+1];
+	
+	//Variable para que el botón "Parar" no funcione si no se ha pulsado antes "Empezar"
+		private boolean running=false;
 
 	/**
 	 * Billiards. constructor que inicializa los componentes del tablero.
 	 */
 	public Billiards() {
 
+		balls = new Ball[N_BALL];
 		board = new Board();
 		board.setForeground(new Color(0, 128, 0));
 		board.setBackground(new Color(0, 128, 0));
@@ -73,6 +78,10 @@ public class Billiards extends JFrame {
 	 */
 	private void initBalls() {
 		// TODO init balls
+		for(int i=0; i < N_BALL; i++){
+			balls[i] = new Ball();	
+		}
+		board.setBalls(balls);
 	}
 
 	/**
@@ -85,6 +94,15 @@ public class Billiards extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Code is executed when start button is pushed
 
+			if(running==false){
+				running=true;
+				for(int i = 0; i < N_BALL; i++){
+					hilos[i]=new Thread(new HiloBasico(balls[i]));
+					hilos[i].start();
+				}
+				hilos[N_BALL]=new Thread(new Painter(board));
+				hilos[N_BALL].start();
+			}
 		}
 	}
 
