@@ -58,6 +58,11 @@ public class Ball {
 		reflect();
 
 		// TODO Check postcondition
+		// si las bolas estan fuera del tablero
+		if((Board.LEFTBOARD > x || Board.RIGHTBOARD < x) || (Board.BOTTOMBOARD < y || Board.TOPBOARD > y)){
+			throw new RuntimeException("Bola/s fuera del tablero");
+			
+		}
 	}
 
 	/**
