@@ -2,43 +2,46 @@ package p01;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+
 /**
- * Ball. Clase  que simula a un conjunto de bolas.
+ * Ball. Clase que simula a un conjunto de bolas.
+ * 
  * @author LuisMiguel.
  * @version 1.0
  *
  */
-//TODO Transform the code to be used safely in a concurrent context.  
+// TODO Transform the code to be used safely in a concurrent context.
 public class Ball {
 	// TODO Find an archive named Ball.png
-	private String Ball = "Ball.png";
+	// private String Ball = "Ball.png";
 
 	// coordenadas
 	private double x, y, dx, dy;
 	// fi angulo de movimiento de la bola
 	// v velocidad de la bola
 	private double v, fi;
-	//imagen
-	private Image image;
-	//tamanio imagen
+	// imagen
+	public Image image;
+	// tamanio imagen
 	private final int IMG_TAM_X, IMG_TAM_Y;
 
 	/**
 	 * Ball. constructor que inicializa los distintos componentes.
 	 */
 	public Ball() {
-		ImageIcon ii = new ImageIcon(this.getClass().getResource(Ball));
+		ImageIcon ii = new ImageIcon(getClass().getResource("/images/Ball2.png"));
+		// new ImageIcon(getClass().getResource("/images/Report.png"));
 		image = ii.getImage();
 
 		// TODO Depend of image size
-		IMG_TAM_X = 32;
-		IMG_TAM_Y = 32;
+		IMG_TAM_X = 100;
+		IMG_TAM_Y = 100;
 
-		x = Billiards.Width / 4 - 16;
-		y = Billiards.Height / 2 - 16;
+		x = Billiards.Width / 4 - 16 ;
+		y = Billiards.Height / 2- 16;
 		v = 5;
 		fi = Math.random() * Math.PI * 2;
-		
+
 	}
 
 	/**
@@ -58,15 +61,11 @@ public class Ball {
 		reflect();
 
 		// TODO Check postcondition
-		// si las bolas estan fuera del tablero
-		if((Board.LEFTBOARD > x || Board.RIGHTBOARD < x) || (Board.BOTTOMBOARD < y || Board.TOPBOARD > y)){
-			throw new RuntimeException("Bola/s fuera del tablero");
-			
-		}
 	}
 
 	/**
-	 * reflect. Metodo que cambia el angulo del movimiento, es decir, reedirecciona las bolas.
+	 * reflect. Metodo que cambia el angulo del movimiento, es decir,
+	 * reedirecciona las bolas.
 	 */
 	private void reflect() {
 		if (Math.abs(x + IMG_TAM_X - Board.RIGHTBOARD) < Math.abs(dx)) {
@@ -81,10 +80,17 @@ public class Ball {
 		if (Math.abs(y - Board.TOPBOARD) < Math.abs(dy)) {
 			fi = -fi;
 		}
+		// TODO Check postcondition
+		// si las bolas estan fuera del tablero
+		if ((Board.LEFTBOARD > x || Board.RIGHTBOARD < x) || (Board.BOTTOMBOARD < y || Board.TOPBOARD > y)) {
+			throw new RuntimeException("Bola/s fuera del tablero");
+
+		}
 	}
 
 	/**
-	 * getX. Metodo que devuelve la coordenada x. 
+	 * getX. Metodo que devuelve la coordenada x.
+	 * 
 	 * @return x coordenada eje x.
 	 */
 	public int getX() {
@@ -93,6 +99,7 @@ public class Ball {
 
 	/**
 	 * getY. Metodo que devuelve la coordenada y.
+	 * 
 	 * @return y coordenada eje y.
 	 */
 	public int getY() {
@@ -101,20 +108,22 @@ public class Ball {
 
 	/**
 	 * getFi. Metodo que devuelve el angulo.
+	 * 
 	 * @return fi angulo.
 	 */
 	public double getFi() {
 		return fi;
 	}
 
-	
 	public double getdr() {
 		return Math.sqrt(dx * dx + dy * dy);
 	}
 
 	/**
 	 * setX. Metodo que establece la coordenada x.
-	 * @param x coordenada eje x.
+	 * 
+	 * @param x
+	 *            coordenada eje x.
 	 */
 	public void setX(double x) {
 		this.x = x;
@@ -122,7 +131,9 @@ public class Ball {
 
 	/**
 	 * setY. Metodo que establece la coordenada y.
-	 * @param y coordenada eje y.
+	 * 
+	 * @param y
+	 *            coordenada eje y.
 	 */
 	public void setY(double y) {
 		this.y = y;
@@ -130,6 +141,7 @@ public class Ball {
 
 	/**
 	 * Image. Metodo que devuelve la imagen de la bolas.
+	 * 
 	 * @return image de la bolas.
 	 */
 	public Image getImage() {
