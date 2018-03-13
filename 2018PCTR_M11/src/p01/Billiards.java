@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 
 /**
  * Billiards. Clase Ventana que contiene el tablero.
+ * 
  * @author LuisMiguel.
  * @version 1.0
  */
@@ -34,10 +35,11 @@ public class Billiards extends JFrame {
 	private final int N_BALL = 3;
 	// Array de bolas.
 	private Ball[] balls = new Ball[N_BALL];
-	private Thread[] hilos = new Thread[N_BALL+1];
-	
-	//Variable para que el botón "Parar" no funcione si no se ha pulsado antes "Empezar"
-		private boolean running=false;
+	private Thread[] hilos = new Thread[N_BALL + 1];
+
+	// Variable para que el botón "Parar" no funcione si no se ha pulsado antes
+	// "Empezar"
+	private boolean running = false;
 
 	/**
 	 * Billiards. constructor que inicializa los componentes del tablero.
@@ -78,14 +80,15 @@ public class Billiards extends JFrame {
 	 */
 	private void initBalls() {
 		// TODO init balls
-		for(int i=0; i < N_BALL; i++){
-			balls[i] = new Ball();	
+		for (int i = 0; i < N_BALL; i++) {
+			balls[i] = new Ball();
 		}
 		board.setBalls(balls);
 	}
 
 	/**
 	 * StartListener. Clase interna que inicia la ejecucion del tablero.
+	 * 
 	 * @author LuisMiguel
 	 *
 	 */
@@ -94,13 +97,13 @@ public class Billiards extends JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Code is executed when start button is pushed
 
-			if(running==false){
-				running=true;
-				for(int i = 0; i < N_BALL; i++){
-					hilos[i]=new Thread(new HiloBasico(balls[i]));
+			if (running == false) {
+				running = true;
+				for (int i = 0; i < N_BALL; i++) {
+					hilos[i] = new Thread(new HiloBasico(balls[i]));
 					hilos[i].start();
 				}
-				hilos[N_BALL]=new Thread(new Painter(board));
+				hilos[N_BALL] = new Thread(new Painter(board));
 				hilos[N_BALL].start();
 			}
 		}
@@ -108,20 +111,31 @@ public class Billiards extends JFrame {
 
 	/**
 	 * StopListener. Clase interna que para la ejecucion del tablero.
+	 * 
 	 * @author LuisMiguel
 	 *
 	 */
 	private class StopListener implements ActionListener {
+
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Code is executed when stop button is pushed
-
+			if (running == true) {
+				for (int i = 0; i < N_BALL; i++) {
+					hilos[i].interrupt();
+				}
+				hilos[N_BALL].interrupt();
+				running = false;
+			}
 		}
+
 	}
-	
+
 	/**
 	 * main. Metodo inicial.
-	 * @param args argumentos.
+	 * 
+	 * @param args
+	 *            argumentos.
 	 */
 
 	public static void main(String[] args) {
