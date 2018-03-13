@@ -25,14 +25,14 @@ public class Billiards extends JFrame {
 	public static int Height = 600;
 
 	// Boton parar, iniciar
-	private JButton b_start, b_stop;
+	private JButton b_start, b_stop,b_restart;
 
 	// Tablero
 	private Board board;
 
 	// TODO update with number of group label. See practice statement.
 	// Numero de bolas en el tablero.
-	private final int N_BALL = 3;
+	private final int N_BALL = 11;
 	// Array de bolas.
 	private Ball[] balls = new Ball[N_BALL];
 	private Thread[] hilos = new Thread[N_BALL + 1];
@@ -50,6 +50,9 @@ public class Billiards extends JFrame {
 		board = new Board();
 		board.setForeground(new Color(0, 128, 0));
 		board.setBackground(new Color(0, 128, 0));
+		//Nuevo
+		b_restart = new JButton("Reiniciar");
+		b_restart.addActionListener(new RestartListener());
 
 		initBalls();
 
@@ -62,6 +65,8 @@ public class Billiards extends JFrame {
 		p_Botton.setLayout(new FlowLayout());
 		p_Botton.add(b_start);
 		p_Botton.add(b_stop);
+		//Nuevo
+		p_Botton.add(b_restart);
 
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(board, BorderLayout.CENTER);
@@ -129,6 +134,21 @@ public class Billiards extends JFrame {
 			}
 		}
 
+	}
+	
+	private class RestartListener implements ActionListener {
+		/**
+		 * actionPerformed. metodo que reinicia el tablero.
+		 * @param arg0 argumento.
+		 */
+		@Override
+		
+		public void actionPerformed(ActionEvent arg0) {
+			if(running == false){
+				initBalls();
+				board.paint(board.getGraphics());
+			}
+		}
 	}
 
 	/**
